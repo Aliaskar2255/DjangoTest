@@ -2,6 +2,11 @@ from django.views.generic import ListView, DetailView, CreateView
 from django.db.models import Q
 from .models import Task, Category
 from .forms import TaskForm
+from django.urls import reverse
+from django.shortcuts import render,redirect
+
+
+
 
 
 class TaskListView(ListView):
@@ -38,3 +43,12 @@ class TaskCreateView(CreateView):
     form_class = TaskForm
     template_name = 'task_form.html'
     success_url = '/tasks/'
+    def create_task(request):
+        if request.method == 'POST':
+            form = TaskForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect(reverse('task_list'))
+            else:
+                form = TaskForm()
+                return render(request, 'task_form.html', {'form': form})
