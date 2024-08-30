@@ -6,7 +6,7 @@ from .forms import TaskForm
 
 class TaskListView(ListView):
     model = Task
-    template_name = 'tasks/task_list.html'
+    template_name = 'task_list.html'
     context_object_name = 'tasks'
 
     def get_queryset(self):
@@ -29,12 +29,12 @@ class TaskListView(ListView):
 
 class TaskDetailView(DetailView):
     model = Task
-    template_name = 'tasks/task_detail.html'
+    template_name = 'task_detail.html'
     context_object_name = 'task'
 
 
 class TaskCreateView(CreateView):
     model = Task
     form_class = TaskForm
-    template_name = 'tasks/task_form.html'
+    template_name = 'task_form.html'
     success_url = '/tasks/'
